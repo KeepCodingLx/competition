@@ -1,0 +1,39 @@
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+struct point{
+    int x;
+    int y;
+    point(int _x, int _y): x(_x), y(_y){}
+    bool operator < (const point &p) const{
+        if(p.x != x) return p.x<x;
+        else return p.y<y;
+    }
+};
+int main()
+{
+    vector<point> p_v;
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        cin>>x>>y;
+        p_v.push_back(point(x, y));
+    }
+    sort(p_v.begin(), p_v.end());
+    int max_y = p_v[0].y;
+    vector<point> result_v;
+    for (int i = 0; i < p_v.size(); ++i) {
+        if(p_v[i].y>=max_y)
+        {
+            max_y = p_v[i].y;
+            result_v.push_back(p_v[i]);
+        }
+    }
+    for (int i = result_v.size()-1; i >= 0; --i) {
+        printf("%d %d\n", result_v[i].x, result_v[i].y);
+    }
+    return 0;
+}
